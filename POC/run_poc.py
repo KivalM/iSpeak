@@ -2,7 +2,7 @@ from transformers import pipeline
 from gradio_client import Client
 
 pipe = pipeline("automatic-speech-recognition",
-                model="facebook/wav2vec2-lv-60-espeak-cv-ft", from_pt=True)
+                model="facebook/wav2vec2-lv-60-espeak-cv-ft")
 
 
 # the audio file, change this to the path of your file
