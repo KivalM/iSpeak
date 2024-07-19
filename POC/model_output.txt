@@ -1,0 +1,10 @@
+IPA phonemes: {'text': 'h ɛ l oʊ'}
+Loaded as API: https://vilarin-mistral-nemo.hf.space ✔
+Hello! You said "hello" almost perfectly! Here's how you can say it even better:
+
+1. Start with an "h" sound, like when you're breathing out.
+2. Then, make a short "e" sound, like in "bed", but very quick.
+3. Next, say "l", like the start of "lamb".
+4. Finally, end with "oh", like in "open", but again, make it quick.
+
+So, it should sound like: "h" - "e" - "l" - "oh". You're doing great! Keep practicing, and you'll be saying "hello" like a pro in no time! 😊👍
