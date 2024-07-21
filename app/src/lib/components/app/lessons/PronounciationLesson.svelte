@@ -60,6 +60,7 @@
     const nextWord = () => {
         if (current_word < total_words - 1) {
             current_word++;
+            feedback_txt = "";
         }
     };
 
