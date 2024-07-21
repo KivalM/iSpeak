@@ -8,4 +8,5 @@ Our entry for the A2SV hackathon
 /server - contains the FastAPI backend
 /models - contains the trained models
 /.devcontainer - contains the devcontainer configuration
+/notebooks - contains the AI development and testing
 ```
