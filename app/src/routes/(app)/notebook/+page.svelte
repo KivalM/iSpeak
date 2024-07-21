@@ -14,9 +14,6 @@
     <div class="divider text-2xl">Greetings</div>
     <div class="text-xl text-center">Learning various ways to greet people</div>
 
-    <!-- table with sample words and a play button -->
-    <div class="divider"></div>
-    <!-- table -->
     <div class="grid grid-cols-2">
         <span>Word</span>
         <span>Play</span>
