@@ -7,6 +7,6 @@ Our entry for the A2SV hackathon
 /web - contains the Svelte frontend
 /server - contains the FastAPI backend
 /models - contains the trained models
-/notebooks - contains the AI development and testing
+/notebooks - contains the AI development and AI testing
 /.devcontainer - contains the devcontainer configuration
 ```
