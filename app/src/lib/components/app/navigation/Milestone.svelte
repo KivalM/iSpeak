@@ -12,7 +12,7 @@
         // wait for a second before unfocusing
         setTimeout(() => {
             selected = false;
-        }, 100);
+        }, 500);
     };
 </script>
 
