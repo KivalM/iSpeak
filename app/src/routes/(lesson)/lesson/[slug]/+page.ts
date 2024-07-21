@@ -32,7 +32,6 @@ export function load({ params }) {
                     words: [
                         "How are you?",
                         "How are you doing?",
-
                     ]
                 },
                 {

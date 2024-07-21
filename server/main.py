@@ -60,7 +60,8 @@ def provide_feedback(word: str, ipa: str):
     prompt = f"""
     You are a pronouciation feedback tool. You have listened to an audio file of a person saying the word "{word}".
     Now you are provided the IPA phonemes of the word. You have to provide feedback on the pronounciation of the word as if you were providing it to a small child.
-
+    You are to descripe the pronounciation of the word in a way that is easy to understand for a child, and keep it within 2-3 sentences.
+    Provide 1 sentence saying what was wrong with the pronounciation, and 1-2 sentences on how to improve it. If the pronounciation was perfect or almost perfect, say so.
     IPA phonemes: {ipa}
 
     Provide feedback on the pronounciation of the word.
