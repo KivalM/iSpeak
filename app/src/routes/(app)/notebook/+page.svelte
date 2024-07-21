@@ -17,75 +17,78 @@
     <!-- table with sample words and a play button -->
     <div class="divider"></div>
     <!-- table -->
-    <table class="table w-full text-2xl">
-        <thead>
-            <tr>
-                <th>Word</th>
-                <th>Play</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Hello</td>
-                <td>
-                    <button class="btn btn-primary">
-                        <Icon icon="mdi:play" class="mr-2 text-xl" />
-                        Play
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>Goodbye</td>
-                <td>
-                    <button class="btn btn-primary">
-                        <Icon icon="mdi:play" class="mr-2 text-xl" />
-                        Play
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="grid grid-cols-2">
+        <span>Word</span>
+        <span>Play</span>
+        <div class="divider"></div>
+        <div class="divider"></div>
+
+        <span>Hello</span>
+
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+        <span>Good Morning</span>
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+
+        <span>Good Afternoon</span>
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+    </div>
 
     <div class="divider text-2xl">Numbers</div>
-    <div class="text-xl text-center">Learning numbers in English</div>
+    <div class="text-xl text-center">Learning Numbers in English</div>
 
-    <table class="table w-full text-2xl">
-        <thead>
-            <tr>
-                <th>Word</th>
-                <th>Play</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>One</td>
-                <td>
-                    <button class="btn btn-primary">
-                        <Icon icon="mdi:play" class="mr-2 text-xl" />
-                        Play
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>Two</td>
-                <td>
-                    <button class="btn btn-primary">
-                        <Icon icon="mdi:play" class="mr-2 text-xl" />
-                        Play
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>Three</td>
-                <td>
-                    <button class="btn btn-primary">
-                        <Icon icon="mdi:play" class="mr-2 text-xl" />
-                        Play
-                    </button>
-                </td>
-            </tr></tbody
-        >
-    </table>
+    <div class="grid grid-cols-2">
+        <span>Word</span>
+        <span>Play</span>
+        <div class="divider"></div>
+        <div class="divider"></div>
+
+        <span>One</span>
+
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+        <span>Two</span>
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+
+        <span>Three</span>
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+
+        <span>Four</span>
+        <span>
+            <button class="btn btn-primary">
+                <Icon icon="mdi:play" class="mr-2 text-xl" />
+                Play
+            </button>
+        </span>
+    </div>
 
     <!-- generate a lesson -->
     <div class="divider"></div>
