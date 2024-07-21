@@ -3,7 +3,6 @@
     import Icon from "@iconify/svelte";
 
     export let data;
-    console.log(data);
 </script>
 
 <h1 class="text-4xl font-bold text-center p-2">Roadmap</h1>

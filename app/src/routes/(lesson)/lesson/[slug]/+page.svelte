@@ -4,6 +4,7 @@
     import Icon from "@iconify/svelte";
 
     export let data;
+    let progress = 0;
     console.log(data);
 </script>
 
@@ -22,7 +23,7 @@
                 <h1 class="text-2xl font-bold text-center">{data.title}</h1>
                 <progress
                     class="progress progress-primary w-56"
-                    value={100}
+                    value={progress}
                     max="100"
                 ></progress>
             </div>
@@ -36,5 +37,5 @@
         </div>
     </div>
 
-    <PronounciationLesson {data} />
+    <PronounciationLesson {data} bind:progress />
 </div>
