@@ -12,6 +12,6 @@ export default {
   ],
 
   daisyui: {
-    themes: ["dim"],
+    themes: ["nord", "dim"],
   },
 };

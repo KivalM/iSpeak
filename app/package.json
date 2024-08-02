@@ -30,6 +30,8 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/varela-round": "^5.0.13",
+		"@supabase/ssr": "^0.4.0",
+		"@supabase/supabase-js": "^2.45.0",
 		"mic-recorder": "^4.9.0"
 	}
 }
