@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let data;
     $: ({ supabase } = data);
 
@@ -10,12 +10,4 @@
     };
 </script>
 
-<!-- <header>
-    <nav>
-        <a href="/">Home</a>
-    </nav>
-    <button on:click={logout}>Logout</button>
-</header> -->
-<main>
-    <slot />
-</main>
+<slot />

@@ -6,7 +6,7 @@
 </script>
 
 <div class="flex flex-col">
-    <TopBar user={data.user} courses={data.courses} />
+    <TopBar user={data.profile} courses={data.courses} />
 
     <div class="w-full flex">
         <Sidebar courses={data.courses} />

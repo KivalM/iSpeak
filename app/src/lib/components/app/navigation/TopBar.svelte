@@ -4,7 +4,7 @@
     import Icon from "@iconify/svelte";
 
     export let user;
-    export let courses;
+    export let courses: any[];
 
     let active_course = courses.find((course) => course.active);
 </script>
@@ -16,7 +16,7 @@
     <div class="flex-1">
         <span class="btn btn-ghost text-xl">
             Welcome back,
-            <span class="font-bold text-secondary">
+            <span class="font-bold text-primary">
                 {user.name}!
             </span>
         </span>
