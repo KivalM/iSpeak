@@ -11,7 +11,7 @@
         | "Italian" = "English";
 
     // emoji mappings
-    const flag_emojis = {
+    const flag_emojis: { [key: string]: string } = {
         English: "fxemoji:greatbritainflag",
         Spanish: "fxemoji:spanishflag",
         French: "fxemoji:franceflag",
