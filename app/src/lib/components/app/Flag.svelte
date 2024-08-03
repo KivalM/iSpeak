@@ -22,5 +22,7 @@
     let flag = flag_emojis[language];
 </script>
 
-<Icon icon={flag} />
-{language}
+<span class="flex items-center gap-3">
+    <Icon icon={flag} />
+    {language}
+</span>

@@ -1,24 +1,27 @@
 <script lang="ts">
     import Flag from "$lib/components/app/Flag.svelte";
-
     import mascotFlag from "$lib/brand/mascot-flag.png";
 </script>
 
 <div class="hero bg-base-200 min-h-[75vh]">
-    <div class="hero-content text-center flex-col lg:flex-row">
+    <div class="hero-content text-center lg:flex-row flex-col-reverse">
         <div class="max-w-lg flex flex-col justify-between">
             <h1 class="text-4xl font-bold">
                 Say Hi to <span class="text-primary text-5xl">LangGuini</span>
             </h1>
             <p class="py-6 text-xl">Learn a new language with ease.</p>
             <div class="gap-2 menu menu-sm menu-vertical">
-                <a class="btn btn-accent btn-lg" href="/signup">Get Started</a>
+                <a class="btn btn-accent btn-lg" href="/auth/signup"
+                    >Get Started
+                </a>
+
                 <a class="btn btn-lg" href="/auth/login"
-                    >I already have an account</a
-                >
+                    >I already have an account
+                </a>
             </div>
         </div>
-        <div class="w-1/2">
+
+        <div class="max-w-md">
             <div class="flex flex-col">
                 <img
                     src={mascotFlag}
@@ -31,7 +34,7 @@
 </div>
 
 <div class="container mx-auto flex justify-center">
-    <ul class=" menu menu-xl menu-horizontal">
+    <ul class="menu menu-xl menu-vertical lg:menu-horizontal">
         <li>
             <span class="text-3xl btn btn-ghost">
                 <Flag language="English" />
@@ -87,7 +90,7 @@
             <button class="btn btn-accent btn-lg">Contact Us</button>
         </div>
 
-        <div class="w-1/2">
+        <div class="hidden lg:flex max-w-md">
             <div class="flex flex-col">
                 <img
                     src={mascotFlag}
@@ -102,7 +105,7 @@
 
 <div class="hero bg-base-200">
     <div class="hero-content text-center flex-col lg:flex-row">
-        <div class="w-1/2">
+        <div class="hidden lg:flex max-w-md">
             <div class="flex flex-col">
                 <img
                     src={mascotFlag}
@@ -145,7 +148,7 @@
             </p>
             <button class="btn btn-accent btn-lg">Contact Us</button>
         </div>
-        <div class="w-1/2">
+        <div class="hidden lg:flex max-w-md">
             <div class="flex flex-col">
                 <img
                     src={mascotFlag}
