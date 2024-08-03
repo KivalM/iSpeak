@@ -1,31 +1,149 @@
 <script lang="ts">
-    import Navigation from "$lib/components/web/Navigation.svelte";
+    import Flag from "$lib/components/app/Flag.svelte";
 
-    import mascotFlag from "$lib/icons/brand/mascot-flag.png";
+    import mascotFlag from "$lib/brand/mascot-flag.png";
 </script>
-
-<Navigation />
 
 <div class="hero bg-base-200 min-h-[75vh]">
     <div class="hero-content text-center flex-col lg:flex-row">
-        <div class="max-w-md flex flex-col justify-between">
+        <div class="max-w-lg flex flex-col justify-between">
             <h1 class="text-4xl font-bold">
-                Say Hi to <span class="text-primary text-5xl">LangGuin</span>
+                Say Hi to <span class="text-primary text-5xl">LangGuini</span>
             </h1>
-            <p class="py-6 text-xl">
-                <!-- iSpeak is a platform that allows you to learn a new language
-                with ease. We provide you with the tools you need to learn a new
-                language in a fun and interactive way, with a focus on accuracy
-                and pronunciation. -->
-                <!-- a short and concise but catchy header -->
-                Learn a new language with ease.
-            </p>
+            <p class="py-6 text-xl">Learn a new language with ease.</p>
             <div class="gap-2 menu menu-sm menu-vertical">
-                <button class="btn btn-accent btn-lg">Get Started</button>
-                <button class="btn btn-outline btn-lg"
-                    >I already have an account</button
+                <a class="btn btn-accent btn-lg" href="/signup">Get Started</a>
+                <a class="btn btn-lg" href="/auth/login"
+                    >I already have an account</a
                 >
             </div>
+        </div>
+        <div class="w-1/2">
+            <div class="flex flex-col">
+                <img
+                    src={mascotFlag}
+                    alt="Mascot Flag"
+                    class="w-96 h-96 mx-auto"
+                />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto flex justify-center">
+    <ul class=" menu menu-xl menu-horizontal">
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="English" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="Xhosa" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="French" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="German" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="Italian" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="Spanish" />
+            </span>
+        </li>
+        <li>
+            <span class="text-3xl btn btn-ghost">
+                <Flag language="Zulu" />
+            </span>
+        </li>
+    </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="hero bg-base-200">
+    <div class="hero-content text-center flex-col lg:flex-row">
+        <div class="max-w-lg flex flex-col justify-between">
+            <h1 class="text-4xl font-bold">
+                LangGuin for <span class="text-primary text-5xl">Everyone</span>
+            </h1>
+            <p class="py-6 text-xl">
+                LangGuin is a platform that allows you to learn a new language
+                with ease. We provide you with the tools you need to learn a new
+                language in a fun and interactive way, with a focus on accuracy
+                and pronunciation.
+            </p>
+            <button class="btn btn-accent btn-lg">Contact Us</button>
+        </div>
+
+        <div class="w-1/2">
+            <div class="flex flex-col">
+                <img
+                    src={mascotFlag}
+                    alt="Mascot Flag"
+                    class="w-96 h-96 mx-auto"
+                />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="divider"></div>
+
+<div class="hero bg-base-200">
+    <div class="hero-content text-center flex-col lg:flex-row">
+        <div class="w-1/2">
+            <div class="flex flex-col">
+                <img
+                    src={mascotFlag}
+                    alt="Mascot Flag"
+                    class="w-96 h-96 mx-auto"
+                />
+            </div>
+        </div>
+        <div class="max-w-lg flex flex-col justify-between">
+            <h1 class="text-4xl font-bold">
+                LangGuin for <span class="text-primary text-5xl"
+                    >Institutions</span
+                >
+            </h1>
+            <p class="py-6 text-xl">
+                LangGuin is a platform that allows you to learn a new language
+                with ease. We provide you with the tools you need to learn a new
+                language in a fun and interactive way, with a focus on accuracy
+                and pronunciation.
+            </p>
+            <button class="btn btn-accent btn-lg">Contact Us</button>
+        </div>
+    </div>
+</div>
+<div class="divider"></div>
+
+<div class="hero bg-base-200">
+    <div class="hero-content text-center flex-col lg:flex-row">
+        <div class="max-w-lg flex flex-col justify-between">
+            <h1 class="text-4xl font-bold">
+                LangGuin for <span class="text-primary text-5xl">
+                    Businesses
+                </span>
+            </h1>
+            <p class="py-6 text-xl">
+                LangGuin is a platform that allows you to learn a new language
+                with ease. We provide you with the tools you need to learn a new
+                language in a fun and interactive way, with a focus on accuracy
+                and pronunciation.
+            </p>
+            <button class="btn btn-accent btn-lg">Contact Us</button>
         </div>
         <div class="w-1/2">
             <div class="flex flex-col">

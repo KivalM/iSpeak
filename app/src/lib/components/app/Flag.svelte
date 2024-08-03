@@ -6,6 +6,8 @@
         | "Spanish"
         | "French"
         | "German"
+        | "Zulu"
+        | "Xhosa"
         | "Italian" = "English";
 
     // emoji mappings
@@ -14,6 +16,7 @@
         Spanish: "fxemoji:spanishflag",
         French: "fxemoji:franceflag",
         Italian: "fxemoji:italianflag",
+        German: "fxemoji:germanyflag",
     };
 
     let flag = flag_emojis[language];

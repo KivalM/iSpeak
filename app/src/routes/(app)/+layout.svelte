@@ -5,12 +5,13 @@
     export let data;
 </script>
 
-<div class="flex">
-    <Sidebar courses={data.courses} />
+<div class="flex flex-col">
+    <TopBar user={data.user} courses={data.courses} />
 
-    <div class="w-full max-w-2xl mx-auto">
-        <TopBar user={data.user} courses={data.courses} />
-
-        <slot />
+    <div class="w-full flex">
+        <Sidebar courses={data.courses} />
+        <div class="flex justify-center flex-1">
+            <slot />
+        </div>
     </div>
 </div>

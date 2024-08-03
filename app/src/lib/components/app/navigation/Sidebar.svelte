@@ -14,10 +14,6 @@
     >
         <ul class="menu menu-lg">
             <li>
-                <a href="/learn" class="text-5xl text-primary">iSpeak </a>
-            </li>
-
-            <li>
                 <a
                     href="/learn"
                     class="text-2xl"
@@ -38,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <details open>
+                <details>
                     <summary class="text-2xl">
                         <Icon icon="fxemoji:books" />
                         My Courses
@@ -71,31 +67,6 @@
                         </li>
                     </ul>
                 </details>
-            </li>
-        </ul>
-
-        <ul class="menu menu-lg bg-base-200 rounded-box w-64">
-            <li>
-                <a
-                    href="/profile"
-                    class="text-2xl"
-                    class:active={active_tab === "profile"}
-                >
-                    <Icon icon="fxemoji:openmouth" />
-                    Profile
-                </a>
-            </li>
-            <li>
-                <a href="/settings" class="text-2xl">
-                    <Icon icon="fxemoji:wrench" />
-                    Settings
-                </a>
-            </li>
-            <li>
-                <a href="/signout" class="text-2xl">
-                    <Icon icon="fxemoji:door" />
-                    Sign Out
-                </a>
             </li>
         </ul>
     </div>

@@ -1,14 +1,13 @@
 <script lang="ts">
-    import mascot from "$lib/icons/brand/mascot.png";
     import Icon from "@iconify/svelte";
     import Flag from "../app/Flag.svelte";
+    import Brand from "$lib/brand/Brand.svelte";
 </script>
 
 <div class="container mx-auto navbar max-w-screen-xl font-sans">
     <div class="flex-1">
         <a class="text-xl font-extrabold" href="/">
-            <img src={mascot} alt="Languini" class="h-10 inline-block" />
-            LangGuin
+            <Brand />
         </a>
     </div>
     <div class="flex-none">
