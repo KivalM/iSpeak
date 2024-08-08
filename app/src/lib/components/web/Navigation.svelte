@@ -25,7 +25,7 @@
     </div>
 </div> -->
 
-<div class="container mx-auto navbar max-w-screen-xl bg-base-100">
+<div class="container mx-auto navbar max-w-screen-xl bg-base-200">
     <div class="navbar-start">
         <a class="btn btn-ghost text-xl" href="/"> <Brand /> </a>
     </div>

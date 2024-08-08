@@ -18,5 +18,6 @@
         return () => data.subscription.unsubscribe();
     });
 </script>
-
-<slot />
+<main class="bg-base-200">    
+<slot/>
+</main>
