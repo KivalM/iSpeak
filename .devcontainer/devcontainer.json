@@ -11,9 +11,9 @@
 			"nvmVersion": "latest"
 		},
 		"ghcr.io/devcontainers/features/python:1": {
-			"installTools": true,
-			"optimize": true,
-			"enableShared": true,
+			//"installTools": true,
+			//"optimize": true,
+			//"enableShared": true,
 			"installJupyterlab": true,
 			"version": "3.9"
 		},
