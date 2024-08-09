@@ -12,11 +12,13 @@
 
     // emoji mappings
     const flag_emojis: { [key: string]: string } = {
-        English: "fxemoji:greatbritainflag",
-        Spanish: "fxemoji:spanishflag",
-        French: "fxemoji:franceflag",
-        Italian: "fxemoji:italianflag",
-        German: "fxemoji:germanyflag",
+        Xhosa: "circle-flags:za",
+        Zulu: "circle-flags:za",
+        English: "circle-flags:gb",
+        Spanish: "circle-flags:es",
+        French: "circle-flags:fr",
+        Italian: "circle-flags:it",
+        German: "circle-flags:de",
     };
 
     let flag = flag_emojis[language];

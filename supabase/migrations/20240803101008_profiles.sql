@@ -1,5 +1,5 @@
 -- create an enum to store languages
-CREATE TYPE language AS ENUM ('en', 'es', 'fr', 'de', 'it', 'pt', 'ja');
+CREATE TYPE language AS ENUM ('en');
 
 -- create a table to store user profiles
 CREATE TABLE public.profiles (

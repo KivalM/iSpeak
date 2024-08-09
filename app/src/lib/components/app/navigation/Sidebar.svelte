@@ -15,28 +15,41 @@
         <ul class="menu menu-lg">
             <li>
                 <a
+                    href="/dashboard"
+                    class="text-2xl"
+                    class:active={active_tab === "dashboard"}
+                >
+                    <Icon icon="mage:dashboard-cross" />
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a
                     href="/learn"
                     class="text-2xl"
                     class:active={active_tab === "learn"}
                 >
-                    <Icon icon="fxemoji:bluebook" />
+                    <Icon icon="mingcute:notebook-fill" />
                     Learn
                 </a>
             </li>
+
             <li>
                 <a
                     href="/notebook"
                     class="text-2xl"
                     class:active={active_tab === "notebook"}
                 >
-                    <Icon icon="fxemoji:openbook" />
+                    <Icon icon="mingcute:book-3-line" />
                     Notebooks
                 </a>
             </li>
+
             <li>
-                <details>
+                <details open>
                     <summary class="text-2xl">
-                        <Icon icon="fxemoji:books" />
+                        <Icon icon="streamline:dictionary-language-book" />
                         My Courses
                     </summary>
 

@@ -33,9 +33,8 @@
     <div class="navbar-end">
         <span class="hidden md:flex text-lg mr-2"> Choose Language: </span>
         <details class="dropdown">
-            <summary class="btn btn-neutral m-1 text-xl">
+            <summary class="btn btn-sm lg:btn-md btn-neutral m-1">
                 <Flag language="English" />
-
                 <Icon icon="ci:chevron-down" class="w-6 h-6" />
             </summary>
             <ul
