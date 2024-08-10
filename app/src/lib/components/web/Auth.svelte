@@ -21,6 +21,19 @@
             <input
                 type="text"
                 class="grow"
+                placeholder="Username"
+                name="username"
+            />
+        </label>
+
+        <label
+            class="input input-bordered flex items-center gap-2 input-primary"
+        >
+            <Icon icon="lucide:user" class="w-6 h-6" />
+
+            <input
+                type="text"
+                class="grow"
                 placeholder="Full Name"
                 name="name"
             />

@@ -1,3 +1,4 @@
+import type { ChatAnthropic } from '@langchain/anthropic';
 import type { Session, SupabaseClient, User } from '@supabase/supabase-js'
 
 declare global {
@@ -8,6 +9,7 @@ declare global {
       safeGetSession: () => Promise<{ session: Session | null; user: User | null }>
       session: Session | null
       user: User | null
+      model: ChatAnthropic
     }
     interface PageData {
       session: Session | null

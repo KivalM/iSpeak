@@ -37,6 +37,14 @@ export const actions: Actions = {
       return fail(400, {password, missing: !password, invalid: password?.length < 8})
     }
 
+    // check that username is entered
+    const username = formData.get('username') as string
+    if (!username && username.length < 1) {
+      return fail(400, {username, missing: true})
+    }
+    
+
+
     // check that password and password validation match
     const password2 = formData.get('password2') as string
     if (password !== password2) {
@@ -45,7 +53,7 @@ export const actions: Actions = {
     }
     console.log("here")
     const { error } = await supabase.auth.signUp({ email, password, 
-      options: { data: { name } }
+      options: { data: { name, username } }
      })
 
 

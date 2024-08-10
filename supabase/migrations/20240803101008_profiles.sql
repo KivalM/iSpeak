@@ -3,7 +3,8 @@ CREATE TYPE language AS ENUM ('en');
 
 -- create a table to store user profiles
 CREATE TABLE public.profiles (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id UUID PRIMARY KEY NOT NULL,
+  username TEXT UNIQUE NOT NULL,
   name TEXT UNIQUE NOT NULL,
   email TEXT UNIQUE NOT NULL,
   bio TEXT,
@@ -31,10 +32,11 @@ CREATE FUNCTION
   RETURNS TRIGGER AS
   $$
   BEGIN
-    INSERT INTO public.profiles (id, name, email)
+    INSERT INTO public.profiles (id, name, username, email)
     VALUES (
       NEW.id,
       NEW.raw_user_meta_data ->> 'name',
+      NEW.raw_user_meta_data ->> 'username',
       New.email
     );
     RETURN NEW;

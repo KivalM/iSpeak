@@ -1,4 +1,4 @@
-export function load({ }) {
+export async function load({ data, parent }) {
 
     let user = {
         name: 'John Doe',
