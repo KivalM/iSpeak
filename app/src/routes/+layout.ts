@@ -2,8 +2,6 @@ import { createBrowserClient, createServerClient, isBrowser } from '@supabase/ss
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
 import type { LayoutLoad } from './$types'
 import { type Database } from '$lib/data/db/database.types'
-import { ChatAnthropic } from "@langchain/anthropic";
-import { PUBLIC_ANTHROPIC_API_KEY } from '$env/static/public';
 
 export const load: LayoutLoad = async ({ data, depends, fetch }) => {
   /**
@@ -50,12 +48,5 @@ export const load: LayoutLoad = async ({ data, depends, fetch }) => {
     data: profile,
   } = await supabase.from('profiles').select('*').eq('id', user.id).single()
 
-
-  const model = new ChatAnthropic({
-    model: "claude-3-5-sonnet-20240620",
-    temperature: 0,
-    anthropicApiKey: PUBLIC_ANTHROPIC_API_KEY
-  });
-
-  return { session, supabase, user, profile, model}
+  return { session, supabase, user, profile }
 }

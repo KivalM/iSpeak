@@ -48,17 +48,14 @@ export const actions: Actions = {
     // check that password and password validation match
     const password2 = formData.get('password2') as string
     if (password !== password2) {
-      console.log(password2)
       return fail(400, {password2, match: false})
     }
-    console.log("here")
     const { error } = await supabase.auth.signUp({ email, password, 
       options: { data: { name, username } }
      })
 
 
     if (error) {
-      console.error(error)
       redirect(303, '/auth/error')
     } else {
       redirect(303, '/dashboard')
@@ -72,7 +69,6 @@ export const actions: Actions = {
 
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
-      console.error(error)
       redirect(303, '/auth/error')
     } else {
       redirect(303, '/dashboard')

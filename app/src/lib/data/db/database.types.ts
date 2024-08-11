@@ -34,41 +34,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      lesson_contents: {
-        Row: {
-          content_json: Json
-          created_at: string
-          difficulty_level: number | null
-          id: string
-          lesson_id: string | null
-          updated_at: string
-        }
-        Insert: {
-          content_json: Json
-          created_at?: string
-          difficulty_level?: number | null
-          id?: string
-          lesson_id?: string | null
-          updated_at?: string
-        }
-        Update: {
-          content_json?: Json
-          created_at?: string
-          difficulty_level?: number | null
-          id?: string
-          lesson_id?: string | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "lesson_contents_lesson_id_fkey"
-            columns: ["lesson_id"]
-            isOneToOne: false
-            referencedRelation: "lessons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       lessons: {
         Row: {
           created_at: string
@@ -145,39 +110,6 @@ export type Database = {
           username?: string
         }
         Relationships: []
-      }
-      user_lesson_contents: {
-        Row: {
-          content_feedback: string | null
-          lesson_content_id: string
-          user_id: string
-        }
-        Insert: {
-          content_feedback?: string | null
-          lesson_content_id: string
-          user_id: string
-        }
-        Update: {
-          content_feedback?: string | null
-          lesson_content_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_lesson_contents_lesson_content_id_fkey"
-            columns: ["lesson_content_id"]
-            isOneToOne: false
-            referencedRelation: "lesson_contents"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "user_lesson_contents_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       user_lessons: {
         Row: {

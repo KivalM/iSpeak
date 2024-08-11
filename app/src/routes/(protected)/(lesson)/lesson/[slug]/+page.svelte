@@ -5,7 +5,6 @@
 
     export let data;
     let progress = 0;
-    console.log(data);
 </script>
 
 <div class="flex flex-col min-h-screen">

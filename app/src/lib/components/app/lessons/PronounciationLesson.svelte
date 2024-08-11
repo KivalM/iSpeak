@@ -2,7 +2,6 @@
     import Icon from "@iconify/svelte";
 
     export let data;
-    console.log(data);
 
     import { onMount } from "svelte";
     let mic_btn;
@@ -27,7 +26,6 @@
 
             // post the audio file to the server
             let text = await postAudio(blob);
-            console.log(text);
             let feedback = await postIpa(text, word);
             feedback_txt = feedback;
 

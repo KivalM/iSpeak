@@ -1,8 +1,8 @@
 import { fail, type Actions } from "@sveltejs/kit";
-import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { contentGenerator} from "$lib/server/langchain";
 
 export const actions: Actions = {
-    default: async ({ request, locals: { supabase, model } }) => {
+    default: async ({ request, locals:{supabase} }) => {
         const formData = await request.formData()
         const prompt = formData.get('prompt') as string
 
@@ -11,13 +11,10 @@ export const actions: Actions = {
             return fail(400, {prompt, missing: true})
         }
 
-        const messages = [
-            new SystemMessage("Translate the following from English into Italian"),
-            new HumanMessage("hi!"),
-          ];
-          
+        const response = await contentGenerator.generateContent(prompt, supabase)
+        console.log(response)
         return {
-            messages:  model.invoke(messages)
+            messages: response
         }
 
     },

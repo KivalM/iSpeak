@@ -1,9 +1,9 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import Generator from "$lib/components/app/lessons/Generator.svelte";
     import Icon from "@iconify/svelte";
 
     export let data;
-    console.log(data);
 
     let generator_open = false;
 </script>
@@ -21,6 +21,30 @@
         {:else}
             {#each data.lessons as lesson}
                 <!-- <RoadMap {lesson} /> -->
+                <div class="card bg-base-100 max-w-lg shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {lesson.name}
+                            {#if lesson.difficulty_level == 1}
+                                <span class="badge badge-success">Beginner</span
+                                >
+                            {:else if lesson.difficulty_level <= 3}
+                                <span class="badge badge-warning"
+                                    >Intermediate</span
+                                >
+                            {:else if lesson.difficulty_level <= 5}
+                                <span class="badge badge-error">Advanced</span>
+                            {/if}
+                        </h2>
+                        <p>{lesson.description}</p>
+                        <div class="card-actions justify-end">
+                            <a
+                                class="btn btn-primary"
+                                href={`/lesson?id=${lesson.id}`}>Start</a
+                            >
+                        </div>
+                    </div>
+                </div>
             {/each}
         {/if}
 
