@@ -55,3 +55,36 @@ class ContentGenerator {
 }
 
 export const contentGenerator = new ContentGenerator();
+
+
+const FeedbackFormat = z.object({
+    errors: z.array(z.string()).describe("A short list of errors that the user made."),
+    feedback: z.string().describe("A feedback message for the user."),
+    rating: z.number().describe("The rating of the user's performance from 1 to 5."),
+});
+
+
+class FeedbackGenerator {
+    model;
+
+    constructor() {
+        this.model = model.withStructuredOutput(FeedbackFormat);
+    }
+
+    async generateContent(prompt:string,) {
+        const messages = [
+            new SystemMessage("You are given a word/phrase, its IPA representation and the users phonetic transcription. Provide feedback on the user's performance." +
+            "The user's phonetic transcription will have some spaces in it. You should ignore these spaces when comparing the user's speech to the actual IPA." +
+            "The user does not see the phonetic representation, so describe the errors in the user's speech in a way that is helpful for them to improve." +
+            "Do not provide feedback in the context of IPA symbols. Instead, provide feedback in plain English." +
+            "Keep the feedback brief and to the point."),
+            new HumanMessage(prompt),
+        ];
+
+        let response = await this.model.invoke(messages)
+
+        return response
+    }
+}
+
+export const feedbackGenerator = new FeedbackGenerator();

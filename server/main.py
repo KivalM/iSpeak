@@ -15,13 +15,7 @@ app = FastAPI(
 )
 # access control allow origin
 
-origins = [
-    "http://localhost",
-    "https://localhost",
-    "http://localhost:8000",
-    "http://localhost:5173",
-    "https://localhost:5173",
-]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
