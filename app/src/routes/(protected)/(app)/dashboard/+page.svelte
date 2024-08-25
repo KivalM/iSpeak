@@ -1,13 +1,11 @@
-<script>
-    import Metrics from "$lib/components/app/dashboard/Metrics.svelte";
-    import Report from "$lib/components/app/dashboard/Report.svelte";
-    import Streak from "$lib/components/app/dashboard/Streak.svelte";
+<script lang="ts">
+    import Dashboard from "$lib/components/app/dashboard/Dashboard.svelte";
+    export let data: {
+        last_lesson: any;
+        lessons: any[];
+    };
 </script>
 
 <div class="container mx-auto max-w-screen-lg">
-    <div class="flex gap-4">
-        <Report />
-        <Streak />
-        <Metrics />
-    </div>
+    <Dashboard last_lesson={data.last_lesson} lessons={data.lessons} />
 </div>

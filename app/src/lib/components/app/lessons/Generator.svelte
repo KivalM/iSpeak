@@ -26,7 +26,7 @@
                     name="prompt"
                 />
             </label>
-            <button class="btn btn-primary">Search</button>
+            <button class="btn btn-primary">Generate with AI</button>
         </form>
     </div>
 </dialog>

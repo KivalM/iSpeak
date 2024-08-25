@@ -11,13 +11,15 @@
             </h1>
             <p class="py-6 text-xl">Learn a new language with ease.</p>
             <div class="gap-2 menu menu-sm menu-vertical">
-                <a class="btn btn-accent btn-lg" href="/auth/signup"
+                <a class="btn btn-primary btn-lg" href="/auth/signup"
                     >Get Started
                 </a>
 
-                <a class="btn btn-lg" href="/auth/login"
+                <a class="btn btn-md" href="/auth/login"
                     >I already have an account
                 </a>
+                <div class="divider">Or</div>
+                <a class="btn btn-accent btn-lg" href="/demo">Try the demo </a>
             </div>
         </div>
 

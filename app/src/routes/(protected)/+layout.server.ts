@@ -4,9 +4,3 @@
  * send a server request, and thus trigger `hooks.server.ts`.
  **/
 
-export async function load({request, locals: { supabase }}) {
-    console.log('load')
-    return {
-        from: 'layout'
-    }
-}
