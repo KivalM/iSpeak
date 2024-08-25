@@ -1,0 +1,35 @@
+# fly.toml app configuration file generated for backend-crimson-sea-6714 on 2024-08-17T18:50:15Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'backend-crimson-sea-6714'
+primary_region = 'jnb'
+
+[build]
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+  # cors allow everything
+  [[http_service.headers]]
+    name = "Access-Control-Allow-Origin"
+    value = "*"
+  [[http_service.headers]]
+    name = "Access-Control-Allow-Methods"
+    value = "*"
+  [[http_service.headers]]
+    name = "Access-Control-Allow-Headers"
+    value = "*"
+  [[http_service.headers]]
+    name = "Access-Control-Allow-Credentials"
+    value = "true"
+
+[[vm]]
+  memory = '4gb'
+  cpu_kind = 'shared'
+  cpus = 2

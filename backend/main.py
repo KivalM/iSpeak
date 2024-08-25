@@ -12,6 +12,9 @@ pipeline_name = "automatic-speech-recognition"
 model_name = "facebook/wav2vec2-lv-60-espeak-cv-ft"
 pipe = pipeline(pipeline_name, model=model_name)
 
+# ensure the data folder exists
+os.system("mkdir -p data")
+
 # Create the FastAPI app
 app = FastAPI(
     title="Pronunciation Feedback Tool",
