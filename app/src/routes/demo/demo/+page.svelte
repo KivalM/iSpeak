@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Bar from "../../../lib/components/app/learn/Bar.svelte";
+    import Bar from "$lib/components/app/lessons/Bar.svelte";
 
     export let data;
     console.log(data);

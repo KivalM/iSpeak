@@ -66,7 +66,7 @@ def test_api():
             ),
         }
         response = client.post(
-            "/transcribe/?word=hello",
+            "/fb/?word=hello",
             files=form_data
         )
         print(response.json())

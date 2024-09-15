@@ -10,6 +10,7 @@
     }
     let mediaRecorder: MediaRecorder;
     export let media: Blob[] = [];
+    export let pause = false;
     let audio: HTMLAudioElement;
     let mic_btn: HTMLButtonElement;
     let recording = false;
@@ -25,10 +26,7 @@
         mediaRecorder.onstop = async function () {
             blob = new Blob(media, { type: "audio/ogg; codecs=opus" });
             src = window.URL.createObjectURL(blob);
-
-            // add the audio file to the audio element
             audio.src = src;
-            // audio.play();
             finish(blob);
         };
     });
@@ -51,7 +49,7 @@
     }
 </script>
 
-{#if mediaRecorder}
+{#if mediaRecorder && !pause}
     <button
         class="btn btn-accent btn-circle"
         on:click|preventDefault={toggleRecording}
@@ -62,5 +60,7 @@
             <Icon icon="mdi:microphone" width="2rem" height="2rem" />
         {/if}
     </button>
-    <audio controls bind:this={audio} {src} class=""></audio>
+    <audio controls bind:this={audio} {src} class="hidden"></audio>
+{:else}
+    <span class="loading loading-spinner loading-sm"></span>
 {/if}

@@ -1,23 +1,60 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
+    import FeedbackConfig from "./word/FeedbackConfig.svelte";
 
-    export let data;
+    export let name: string = "Greetings";
+    export let description: string =
+        "Learn how to greet people in different languages";
+    export let progress: number = 20;
+    export let max_progress: number = 100;
+    export let open: boolean = false;
 </script>
 
 <div class="navbar bg-base-100">
-    <div class="navbar-start">
-        <!-- back to menu -->
-        <a href="/learn" class="btn btn-ghost text-xl">
-            <Icon icon="akar-icons:arrow-left" class="w-6 h-6" />
-            Back to Lessons
-        </a>
-    </div>
+    <div class="navbar-start"></div>
     <div class="navbar-center">
-        <div class="flex flex-col">
-            <div class="btn btn-ghost text-xl">{data.lesson?.name}</div>
-            <progress class="progress progress-primary w-56" value="0" max="100"
-            ></progress>
+        <div class="flex flex-col gap-1 p-2">
+            <div class="">
+                <!-- help button that shows description on hover -->
+                <div
+                    class="tooltip tooltip-bottom cursor-help text-xl text-center flex items-center justify-center gap-2"
+                    data-tip={description}
+                >
+                    {name}
+                    <Icon
+                        icon="material-symbols:help-outline"
+                        width="1.2rem"
+                        height="1.2rem"
+                    />
+                </div>
+            </div>
+            <div
+                class="tooltip tooltip-bottom cursor-help"
+                data-tip="Progress: {progress + 1}/{max_progress}"
+            >
+                <progress
+                    class="progress progress-primary w-56"
+                    value={progress + 1}
+                    max={max_progress}
+                ></progress>
+            </div>
         </div>
     </div>
-    <div class="navbar-end"></div>
+    <div class="navbar-end">
+        <!-- close -->
+        <a
+            href="/set"
+            class="btn btn-ghost text-xl"
+            on:click|preventDefault={() => {
+                open = true;
+            }}
+        >
+            <Icon icon="mdi:settings" width="2rem" height="2rem" />
+        </a>
+        <a href="/lessons" class="btn btn-ghost text-xl">
+            <Icon icon="material-symbols:close" width="2rem" height="2rem" />
+        </a>
+    </div>
 </div>
+
+<FeedbackConfig bind:open></FeedbackConfig>

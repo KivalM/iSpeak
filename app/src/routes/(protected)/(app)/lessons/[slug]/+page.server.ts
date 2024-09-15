@@ -1,4 +1,4 @@
-import { PUBLIC_TRANSCRIPTION_API_URL } from "$env/static/public";
+import { PRIVATE_TRANSCRIPTION_API_URL } from "$env/static/private";
 import { fail, type Actions } from "@sveltejs/kit";
 
 export const actions = {
@@ -17,7 +17,7 @@ export const actions = {
         console.log(data)
 
         // forward the request to the fastapi server
-        const response = await fetch(PUBLIC_TRANSCRIPTION_API_URL+"/fb/", {
+        const response = await fetch(PRIVATE_TRANSCRIPTION_API_URL+"/fb/", {
             method: 'POST',
             body: data
         })

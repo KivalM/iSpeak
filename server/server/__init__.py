@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi import FastAPI, File, UploadFile, Form
-from pydantic import BaseModel
-from typing import Annotated
 from .core.feedback import FeedbackPipeline
+from .core.gen import ContentGenerator
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(
     title="Pronunciation Feedback Tool",
@@ -25,3 +27,9 @@ async def health_check():
 def transcribe_audio(word: str = Form(...),  audio: UploadFile = File(...)):
     pipe = FeedbackPipeline()
     return pipe.generate(word, audio.file.read())
+
+
+@app.post("/generate/")
+def generate_lesson(prompt: str = Form(...), target_language: str = Form("English"), level: int = Form(1)):
+    generator = ContentGenerator()
+    return generator.generate(prompt, target_language, level)

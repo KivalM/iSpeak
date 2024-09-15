@@ -9,20 +9,25 @@
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal">
             <li>
-                <a href="/#you" class="btn btn-ghost text-xl"> For Everyone </a>
+                <a href="/#you" class="btn btn-ghost text-xl"> About Us </a>
             </li>
             <li>
                 <a href="/#business" class="btn btn-ghost text-xl">
-                    For Business
+                    Our Mission
                 </a>
             </li>
             <li>
                 <a href="/#pricing" class="btn btn-ghost text-xl"> Pricing </a>
             </li>
             <li>
+                <a href="/#contact" class="btn btn-ghost text-xl"> Team </a>
+            </li>
+            <li>
                 <a href="/#contact" class="btn btn-ghost text-xl"> Contact </a>
             </li>
         </ul>
     </div>
-    <div class="navbar-end"></div>
+    <div class="navbar-end">
+        <a href="/auth/signup" class="btn btn-ghost text-xl"> Sign In </a>
+    </div>
 </div>

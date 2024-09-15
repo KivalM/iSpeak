@@ -7,13 +7,34 @@ create table public.lessons (
     lesson_content JSONB NOT NULL,
     difficulty_level integer,
     created_by UUID REFERENCES profiles(id),
+    public BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::TEXT, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::TEXT, now()) NOT NULL
 );
 
-CREATE TABLE public.user_lessons (
-    user_id UUID REFERENCES profiles(id),
-    lesson_id UUID REFERENCES lessons(id),
-    lesson_feedback text,
-    PRIMARY KEY (user_id, lesson_id)
-);
+ALTER TABLE public.lessons
+  ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY
+    "Can only view own lesson data."
+    ON public.lessons
+    FOR SELECT
+    USING ( auth.uid() = created_by or public );
+
+CREATE POLICY
+    "Can only update own lesson data."
+    ON public.lessons
+    FOR UPDATE
+    USING ( auth.uid() = created_by );
+
+CREATE POLICY
+    "Can only delete own lesson data."
+    ON public.lessons
+    FOR DELETE
+    USING ( auth.uid() = created_by );
+
+CREATE POLICY
+    "Can only insert own lesson data."
+    ON public.lessons
+    FOR INSERT
+    WITH CHECK ( auth.uid() = created_by );

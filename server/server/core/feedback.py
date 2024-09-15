@@ -1,32 +1,33 @@
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from transformers import pipeline
 import phonemizer
-from nltk.metrics.distance import edit_distance
+import Levenshtein
 from langchain_anthropic import ChatAnthropic
 from langchain_core.pydantic_v1 import BaseModel, Field
 import dotenv
-import os
 
 dotenv.load_dotenv()
 
 
 class Suggestions(BaseModel):
-    word: str = Field(
+    segment: str = Field(
         "",
-        description="The word that the suggestion is for",
+        description="The segment of the word that needs to be corrected",
     )
-    suggestions: List[str] = Field(
-        [],
-        description="List of suggestions for the word",
+
+    suggestions: str = Field(
+        "",
+        description="The suggested correction for the segment",
     )
+
     importance: int = Field(
         0,
-        description="The importance of the suggestion from 1 to 100",
+        description="How wrong the segment is and how important it is to correct it(0-100)",
     )
 
 
 class Feedback(BaseModel):
-    general_feedback: List[str] = Field(
+    general_feedback: str = Field(
         "",
         description="Overall feedback on the text",
     )
@@ -43,32 +44,26 @@ class FeedbackGenerator:
         ).with_structured_output(Feedback)
 
     def generate(self,
+                 word: str,
                  user_ipa: str,
                  target_ipa: str,
                  target_language: str,
                  native_language: str,
                  similarity: float,
+                 content: str = "",
                  level: int = 1) -> Feedback:
-        transcript = user_ipa.replace(" ", "")
-        target = target_ipa.replace(" ", "")
-
-        # now insert a space between each character
-        # to allow the model to understand the phonemes
-        transcript = " ".join(transcript)
-        target = " ".join(target)
 
         prompt = f"""
-        Given the following ipa transcription that has been generated from the audio file: {transcript},
-        The user is trying to say the word: {target},
+        Given the following ipa transcription that has been generated from the audio file: {user_ipa},
+        The user is trying to say the word: {word}, and the correct ipa transcription is: {target_ipa},
         The provided IPA transcription is modified to include spaces between each character.
         The similarity between the ipa transcription and the phonemes is: {similarity},
         The user's native language is: {native_language},
         The target language is: {target_language}, and the user's efficiency level is: {level}.
         Please provide feedback on the transcription but don't mention the anythin in IPA.
         Provide detailed feedback on the errors and suggest possible corrections.
-        When providing feedback, please consider the user's native language and the target language.
-        Assume you are speaking to a middle school student.
-        If the issues are minor, ignore them.
+        See below the differences between the ipa transcription and the phonemes:
+        {content}
         """
         return self.llm.invoke(prompt)
 
@@ -94,26 +89,80 @@ class FeedbackPipeline:
             word, language='en', backend='espeak', strip=True, language_switch='remove-flags'
         )
 
-    def score(self, ipa: str, phonemes: str) -> float:
-        ipa = ipa.replace(" ", "")
-        phonemes = phonemes.replace(" ", "")
-        print(f"ipa: {ipa}")
-        print(f"phonemes: {phonemes}")
+    def score(self, user_ipa: str, target_ipa: str) -> float:
+        return Levenshtein.ratio(user_ipa, target_ipa)
 
-        print(f"edit_distance: {edit_distance(ipa, phonemes)}")
-        return 1 - edit_distance(ipa, phonemes) / max(len(ipa), len(phonemes))
+    def fix_spaces(self, ipa: str, target_ipa: str) -> str:
+        # remove all the spaces from the ipa
+        ipa = ipa.replace(" ", "")
+        # get all the ops to convert the ipa to the target ipa
+        ops = Levenshtein.editops(ipa, target_ipa)
+        non_matching = Levenshtein.opcodes(ops, ipa, target_ipa)
+
+        # apply all the ops that insert a space in the ipa
+        for tag, i1, i2, j1, j2 in non_matching:
+            if tag == 'insert' and target_ipa[j1:j2] == " ":
+                ipa = ipa[:i1] + " " + ipa[i1:]
+        return ipa, target_ipa
+
+    def info_string(self, user_ipa: str, target_ipa: str) -> str:
+        ops = Levenshtein.editops(user_ipa, target_ipa)
+        non_matching = Levenshtein.opcodes(ops, user_ipa, target_ipa)
+        contents = []
+        for tag, i1, i2, j1, j2 in non_matching:
+            print(tag, user_ipa[i1:i2], target_ipa[j1:j2])
+            if tag == 'equal':
+                contents.append(('equal', user_ipa[i1:i2]))
+            elif tag == 'replace':
+                contents.append(
+                    ('replace', user_ipa[i1:i2], target_ipa[j1:j2]))
+            elif tag == 'delete':
+                contents.append(('delete', user_ipa[i1:i2]))
+            elif tag == 'insert':
+                contents.append(('insert', target_ipa[j1:j2]))
+        contents_str = "The key differences in the string are highlighted below: "
+        for tag, *args in contents:
+            if tag == 'equal':
+                contents_str += f" Same({args[0]}), "
+            elif tag == 'replace':
+                contents_str += f" Replace({args[0]} with {args[1]}), "
+            elif tag == 'delete':
+                contents_str += f" Delete({args[0]}), "
+            elif tag == 'insert':
+                contents_str += f" Insert({args[0]}), "
+        contents_str = contents_str.removesuffix(", ")
+        return (contents, contents_str)
 
     def generate(self, word: str, audio_file: bytes) -> Dict[str, Any]:
-        ipa = self.transcribe(audio_file)
-        phonemes = self.get_phonemes(word)
-        score = self.score(ipa, phonemes)
+        user_ipa = self.transcribe(audio_file)
+        target_ipa = self.get_phonemes(word)
+
+        user_ipa = user_ipa.replace("ː", "").replace("ˈ", "").replace(
+            "ˌ", "").removeprefix(" ").removesuffix(" ")
+
+        target_ipa = target_ipa.replace("ː", "").replace("ˈ", "").replace(
+            "ˌ", "").removeprefix(" ").removesuffix(" ")
+
+        user_ipa, target_ipa = self.fix_spaces(user_ipa, target_ipa)
+
+        op_codes, content = self.info_string(user_ipa, target_ipa)
+        score = self.score(user_ipa, target_ipa)
+
         feedback = FeedbackGenerator().generate(
-            ipa, word, "en", "en", score)
+            word=word,
+            user_ipa=user_ipa,
+            target_ipa=target_ipa,
+            target_language="English",
+            native_language="English",
+            similarity=score,
+            content=content,
+        )
 
         return {
             "word": word,
-            "ipa": ipa,
-            "phonemes": phonemes,
+            "user_ipa": user_ipa,
+            "target_ipa": target_ipa,
+            "op_codes": op_codes,
             "score": score,
             "feedback": feedback.dict(),
         }

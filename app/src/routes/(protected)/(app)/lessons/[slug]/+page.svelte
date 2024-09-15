@@ -1,14 +1,17 @@
 <script lang="ts">
     import { applyAction, deserialize } from "$app/forms";
-    import Bar from "$lib/components/app/learn/Bar.svelte";
+    import Bar from "$lib/components/app/lessons/Bar.svelte";
     import Test from "$lib/components/app/lessons/word/Test.svelte";
+    import Icon from "@iconify/svelte";
     import type { ActionResult } from "@sveltejs/kit";
 
     export let data;
     export let form;
-    $: console.log("data", data);
-    $: console.log("form", form);
+
+    let processing = false;
     async function submitForm(e: CustomEvent) {
+        if (processing) return;
+        processing = true;
         let blob = e.detail.blob;
         console.log("blob", blob);
         const formData = new FormData();
@@ -22,8 +25,8 @@
             },
         });
         const result: ActionResult = deserialize(await response.text());
-        console.log("result", result);
         applyAction(result);
+        processing = false;
     }
 </script>
 
@@ -36,22 +39,41 @@
 
 <div class="card flex flex-col items-center">
     <form class="flex items-center justify-center">
-        <Test phrase={data.word} on:done={submitForm} feedback={form}></Test>
+        <Test
+            phrase={data.word}
+            on:done={submitForm}
+            feedback={form}
+            {processing}
+        ></Test>
     </form>
-    <div>
-        {#if data.prev !== null}
-            <a
-                data-sveltekit-replacestate
-                href="/lessons/{data.lesson?.id}?idx={data.prev}">Previous</a
-            >
-        {/if}
-        {#if data.next}
-            <a
-                data-sveltekit-replacestate
-                href="/lessons/{data.lesson?.id}?idx={data.next}">Next</a
-            >
-        {:else}
-            <a href="/lessons">Finish</a>
-        {/if}
-    </div>
+</div>
+
+<div class="flex justify-between container mx-auto">
+    {#if data.prev !== null}
+        <a
+            data-sveltekit-replacestate
+            href="/lessons/{data.lesson?.id}?idx={data.prev}"
+            class="btn btn-primary"
+        >
+            <Icon icon="mdi:arrow-left" width="1rem" height="1rem" />
+            Previous</a
+        >
+    {:else}
+        <span></span>
+    {/if}
+
+    {#if data.next}
+        <a
+            data-sveltekit-replacestate
+            class="btn btn-primary"
+            href="/lessons/{data.lesson?.id}?idx={data.next}"
+            >Next
+            <Icon icon="mdi:arrow-right" width="1rem" height="1rem" />
+        </a>
+    {:else}
+        <a data-sveltekit-replacestate class="btn btn-primary" href="/lessons/">
+            Finish
+            <Icon icon="mdi:check" width="1rem" height="1rem" />
+        </a>
+    {/if}
 </div>

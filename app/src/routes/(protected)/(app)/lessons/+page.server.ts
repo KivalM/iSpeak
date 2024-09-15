@@ -1,21 +1,54 @@
-import { fail, type Actions } from "@sveltejs/kit";
-import { contentGenerator} from "$lib/server/langchain";
+import { error, fail, type Actions } from "@sveltejs/kit";
+import { PRIVATE_TRANSCRIPTION_API_URL } from "$env/static/private";
+import type {  Tables, Database, Enums, TablesInsert } from "$lib/data/db/database.types";
+// import { contentGenerator} from "$lib/server/langchain";
 
 export const actions: Actions = {
-    default: async ({ request, locals:{supabase} }) => {
+    generate: async ({ request, locals:{supabase, session} }) => {
         const formData = await request.formData()
         const prompt = formData.get('prompt') as string
 
-        // check that the prompt is entered
-        if (!prompt && prompt.length < 1) {
-            return fail(400, {prompt, missing: true})
+        let data = new FormData()
+        data.append('prompt', prompt)
+        data.append('target_language', prompt)
+        data.append('difficulty', prompt)
+
+        let response = await fetch(PRIVATE_TRANSCRIPTION_API_URL+"/generate/", {
+            method: 'POST',
+            body: data
+        })
+
+        if (!response.ok) {
+            return fail(response.status)
         }
 
-        const response = await contentGenerator.generateContent(prompt, supabase)
-        console.log(response)
-        return {
-            messages: response
+        let data2 = await response.json()
+
+
+        let lesson : TablesInsert<'lessons'> = {
+            language: 'en',
+            name: data2.name,
+            description: data2.description,
+            lesson_content: JSON.stringify(data2.content),
+            difficulty_level: data2.difficulty,
+            created_by: session?.user.id,
         }
 
+        if (supabase) {
+            let response = await supabase.from('lessons').insert(lesson);
+            if (response.error) {
+                fail(response.error.message)
+            }
+        }
+
+        return data2
+    },
+
+    delete: async ({ request, locals:{supabase} }) => {
+        // get form
+        const form = await request.formData()
+        const id = form.get('lesson_id') as string
+        let response = await supabase.from('lessons').delete().eq('id', id);
+        return response
     },
 } satisfies Actions;
