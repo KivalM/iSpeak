@@ -21,9 +21,6 @@
 
     <div class="flex-none">
         <div class="menu menu-horizontal">
-            <a href="/settings" class="btn btn-ghost btn-circle text-xl">
-                <Icon icon="mingcute:settings-5-fill" class="text-4xl" />
-            </a>
             <a href="/profile" class="btn btn-ghost btn-circle text-xl">
                 <Icon icon="mingcute:user-4-fill" class="text-4xl" />
             </a>

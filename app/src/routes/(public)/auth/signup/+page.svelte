@@ -1,6 +1,8 @@
 <script lang="ts">
     import mascotFlag from "$lib/brand/mascot-flag.png";
     import Auth from "$lib/components/web/Auth.svelte";
+    export let form;
+    $: console.log("form", form);
 </script>
 
 <div class="container mx-auto max-w-screen-lg">
@@ -12,8 +14,7 @@
             <p class="text-lg">
                 Create an account to get started with our services.
             </p>
-
-            <Auth tab={false} />
+            <Auth tab={false} {form} />
         </div>
     </div>
 </div>

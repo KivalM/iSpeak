@@ -1,5 +1,4 @@
 <script lang="ts">
-    import RoadMap from "$lib/components/app/navigation/RoadMap.svelte";
     import Icon from "@iconify/svelte";
 
     export let data;

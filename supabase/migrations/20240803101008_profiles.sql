@@ -5,7 +5,7 @@ CREATE TYPE language AS ENUM ('en');
 CREATE TABLE public.profiles (
   id UUID PRIMARY KEY NOT NULL,
   username TEXT UNIQUE NOT NULL,
-  name TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   bio TEXT,
   language language DEFAULT 'en',

@@ -3,13 +3,25 @@
     import Flag from "../app/Flag.svelte";
 
     export let tab = false;
+    export let form = null;
+    $: console.log("form", form);
 </script>
 
-<form method="POST" action="/auth/?/login" class="flex flex-col gap-4 max-w-md">
+<form method="POST" action="/auth/login" class="flex flex-col gap-4 max-w-md">
+    {#if form && form.message}
+        <div class="alert alert-error">{form.message}</div>
+    {/if}
+
     <label class="input input-bordered flex items-center gap-2 input-primary">
         <Icon icon="lucide:mail" class="w-6 h-6" />
-
         <input type="text" class="grow" placeholder="Email" name="email" />
+        {#if form && form.email}
+            <div class="text-error">
+                {form.email}
+                {#if form.missing}is required{:else}
+                    is invalid{/if}
+            </div>
+        {/if}
     </label>
 
     {#if !tab}
@@ -24,6 +36,13 @@
                 placeholder="Username"
                 name="username"
             />
+            {#if form && form.username}
+                <div class="text-error">
+                    {form.username}
+                    {#if form.missing}is required{:else}
+                        is invalid{/if}
+                </div>
+            {/if}
         </label>
 
         <label
@@ -37,6 +56,13 @@
                 placeholder="Full Name"
                 name="name"
             />
+            {#if form && form.name}
+                <div class="text-error">
+                    {form.name}
+                    {#if form.missing}is required{:else}
+                        is invalid{/if}
+                </div>
+            {/if}
         </label>
     {/if}
 
@@ -49,6 +75,13 @@
             placeholder="Password"
             name="password"
         />
+        {#if form && form.password}
+            <div class="text-error">
+                {form.password}
+                {#if form.missing}is required{:else}
+                    is invalid{/if}
+            </div>
+        {/if}
     </label>
 
     {#if tab}
@@ -83,7 +116,7 @@
             ></ul>
         </details>
 
-        <button formaction="/auth/?/signup" class="btn btn-primary"
+        <button formaction="/auth/signup" class="btn btn-primary"
             >Sign up</button
         >
     {/if}

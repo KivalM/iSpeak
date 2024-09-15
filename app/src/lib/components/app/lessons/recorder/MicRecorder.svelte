@@ -29,13 +29,13 @@
             // add the audio file to the audio element
             audio.src = src;
             // audio.play();
+            finish(blob);
         };
     });
 
     function stopRecording() {
         recording = false;
         mediaRecorder.stop();
-        finish(blob);
     }
     function startRecording() {
         media = [];
