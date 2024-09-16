@@ -8,6 +8,7 @@ create table public.lessons (
     difficulty_level integer,
     created_by UUID REFERENCES profiles(id),
     public BOOLEAN DEFAULT FALSE,
+    completed BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::TEXT, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::TEXT, now()) NOT NULL
 );

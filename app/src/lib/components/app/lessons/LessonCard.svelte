@@ -5,6 +5,7 @@
 
     export let lesson: Tables<"lessons">;
     export let deleteModalOpen: boolean = false;
+    export let hideDelete: boolean = false;
 </script>
 
 <LessonModal lesson_id={lesson.id} bind:open={deleteModalOpen} />
@@ -13,17 +14,20 @@
     <div class="card-body">
         <div class="flex flex-col items-center justify-center gap-2">
             <!-- delete button -->
-            <button
-                class="btn btn-ghost btn-circle absolute top-2 right-2 hover:bg-transparent"
-                on:click={() => {
-                    deleteModalOpen = true;
-                }}
-            >
-                <Icon
-                    icon="akar-icons:trash-can"
-                    class="mr-2 text-xl text-error"
-                />
-            </button>
+            {#if !hideDelete}
+                <button
+                    class="btn btn-ghost btn-circle absolute top-2 right-2 hover:bg-transparent"
+                    on:click={() => {
+                        deleteModalOpen = true;
+                    }}
+                >
+                    <Icon
+                        icon="akar-icons:trash-can"
+                        class="mr-2 text-xl text-error"
+                    />
+                </button>
+            {/if}
+
             <h3
                 class="text-xl font-bold flex items-center gap-5 justify-between"
             >

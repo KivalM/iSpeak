@@ -51,4 +51,12 @@ export const actions: Actions = {
         let response = await supabase.from('lessons').delete().eq('id', id);
         return response
     },
+
+    finish: async ({ request, locals:{supabase} }) => {
+        // get form
+        const form = await request.formData()
+        const id = form.get('lesson_id') as string
+        let response = await supabase.from('lessons').update({completed: true}).eq('id', id);
+        return response
+    },
 } satisfies Actions;

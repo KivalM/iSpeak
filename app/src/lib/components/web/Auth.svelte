@@ -105,7 +105,7 @@
             />
         </label>
 
-        <details class="dropdown w-full">
+        <!-- <details class="dropdown w-full">
             <summary class="btn btn-outline m-1 text-xl w-full">
                 <Flag language="English" />
 
@@ -114,11 +114,27 @@
             <ul
                 class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
             ></ul>
-        </details>
+        </details> -->
 
         <button formaction="/auth/signup" class="btn btn-primary"
             >Sign up</button
         >
+    {/if}
+
+    {#if !tab}
+        <!-- sign in instead -->
+        <div class="text-center">
+            <a href="/auth/login" class="link">
+                Already have an account? Sign in
+            </a>
+        </div>
+    {:else}
+        <!-- sign up instead -->
+        <div class="text-center">
+            <a href="/auth/signup" class="link">
+                Don't have an account? Sign up
+            </a>
+        </div>
     {/if}
 </form>
 

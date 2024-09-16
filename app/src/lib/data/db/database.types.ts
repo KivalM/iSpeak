@@ -36,6 +36,7 @@ export type Database = {
     Tables: {
       lessons: {
         Row: {
+          completed: boolean | null
           created_at: string
           created_by: string | null
           description: string
@@ -44,9 +45,11 @@ export type Database = {
           language: Database["public"]["Enums"]["language"]
           lesson_content: Json
           name: string
+          public: boolean | null
           updated_at: string
         }
         Insert: {
+          completed?: boolean | null
           created_at?: string
           created_by?: string | null
           description: string
@@ -55,9 +58,11 @@ export type Database = {
           language: Database["public"]["Enums"]["language"]
           lesson_content: Json
           name: string
+          public?: boolean | null
           updated_at?: string
         }
         Update: {
+          completed?: boolean | null
           created_at?: string
           created_by?: string | null
           description?: string
@@ -66,6 +71,7 @@ export type Database = {
           language?: Database["public"]["Enums"]["language"]
           lesson_content?: Json
           name?: string
+          public?: boolean | null
           updated_at?: string
         }
         Relationships: [
@@ -111,38 +117,38 @@ export type Database = {
         }
         Relationships: []
       }
-      user_lessons: {
+      results: {
         Row: {
-          lesson_feedback: string | null
-          lesson_id: string
+          category: string
+          created_at: string
+          feedback: Json
+          id: string
+          score: number
+          updated_at: string
           user_id: string
+          word: string
         }
         Insert: {
-          lesson_feedback?: string | null
-          lesson_id: string
+          category: string
+          created_at?: string
+          feedback: Json
+          id?: string
+          score: number
+          updated_at?: string
           user_id: string
+          word: string
         }
         Update: {
-          lesson_feedback?: string | null
-          lesson_id?: string
+          category?: string
+          created_at?: string
+          feedback?: Json
+          id?: string
+          score?: number
+          updated_at?: string
           user_id?: string
+          word?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "user_lessons_lesson_id_fkey"
-            columns: ["lesson_id"]
-            isOneToOne: false
-            referencedRelation: "lessons"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "user_lessons_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Views: {

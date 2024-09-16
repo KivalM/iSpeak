@@ -71,9 +71,12 @@
             <Icon icon="mdi:arrow-right" width="1rem" height="1rem" />
         </a>
     {:else}
-        <a data-sveltekit-replacestate class="btn btn-primary" href="/lessons/">
-            Finish
-            <Icon icon="mdi:check" width="1rem" height="1rem" />
-        </a>
+        <form method="POST" action="/lessons/?/finish">
+            <input type="hidden" name="lesson_id" value={data.lesson?.id} />
+            <button class="btn btn-primary" type="submit">
+                Finish
+                <Icon icon="mdi:check" width="1rem" height="1rem" />
+            </button>
+        </form>
     {/if}
 </div>
