@@ -5,6 +5,22 @@ import { error } from '@sveltejs/kit';
 
 export async function load({parent}) {
     const { supabase } = await parent();
+
+    const rowCount = await supabase.from('results').select('word.count()');
+    if (rowCount.error)
+    {
+        return error(rowCount.error.message);
+    }
+    if (rowCount.data[0].count === 0)
+    {
+        return {
+            uniqueWords: 0,
+            uniqueDayCount: 0,
+            avgScore: 0,
+            bestWord: {word: '', max: 0},
+            latestLesson: {name: '', description: '', created_at: ''}
+        }
+    }
     // count words learned
     const wordCount = await supabase.from('results').select('word');
     let uniqueWords = new Set();
@@ -58,7 +74,6 @@ export async function load({parent}) {
 
     // most recently created lesson
     const latestLesson = await supabase.from('lessons').select('*').order('created_at', {ascending: false}).limit(1);
-    console.log(latestLesson.data[0].name);
 
     return {
         // results: results.data

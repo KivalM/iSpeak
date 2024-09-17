@@ -1,4 +1,4 @@
-import { PRIVATE_TRANSCRIPTION_API_URL } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 import type { TablesInsert } from "$lib/data/db/database.types";
 import { fail, type Actions } from "@sveltejs/kit";
 
@@ -18,7 +18,7 @@ export const actions = {
         console.log(data)
 
         // forward the request to the fastapi server
-        const response = await fetch(PRIVATE_TRANSCRIPTION_API_URL+"/fb/", {
+        const response = await fetch(env.PRIVATE_TRANSCRIPTION_API_URL+"/fb/", {
             method: 'POST',
             body: data
         })
@@ -30,7 +30,7 @@ export const actions = {
             category: 'Default',
             score: data2.score,
             feedback: data2,
-            user_id: session?.user.id,
+            user_id: session?.user.id!,
         }
 
         if (supabase) {

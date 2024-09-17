@@ -14,4 +14,4 @@ RUN apt-get update && apt-get install -y espeak ffmpeg
 WORKDIR /app
 COPY --from=builder /app/.venv .venv/
 COPY . .
-CMD ["/app/.venv/bin/fastapi", "run", "/app/server"]
+CMD ["/app/.venv/bin/fastapi", "run"]

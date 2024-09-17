@@ -1,39 +1,5 @@
-# flyctl launch added from app/.gitignore
-app/**/node_modules
-
-# Output
-app/**/.output
-app/**/.vercel
-app/.svelte-kit
-app/build
-
-# OS
-app/**/.DS_Store
-app/**/Thumbs.db
-
-# Env
-app/**/.env
-app/**/.env.*
-
-# Vite
-app/**/vite.config.js.timestamp-*
-app/**/vite.config.ts.timestamp-*
-
-# netlify
-app/**/.netlify
-
-# flyctl launch added from backend/.gitignore
-# pycache
-backend/**/__pycache__
-backend/**/.venv
-
-# flyctl launch added from backend/.venv/.gitignore
-# created by virtualenv automatically
-backend/.venv/**/*
-
-# flyctl launch added from supabase/.gitignore
-# Supabase
-supabase/**/.branches
-supabase/**/.temp
-supabase/**/.env
 fly.toml
+.git/
+__pycache__/
+.envrc
+.venv/

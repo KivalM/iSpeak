@@ -1,5 +1,5 @@
 import { error, fail, type Actions } from "@sveltejs/kit";
-import { PRIVATE_TRANSCRIPTION_API_URL } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 import type {  Tables, Database, Enums, TablesInsert } from "$lib/data/db/database.types";
 // import { contentGenerator} from "$lib/server/langchain";
 
@@ -13,7 +13,7 @@ export const actions: Actions = {
         data.append('target_language', prompt)
         data.append('difficulty', prompt)
 
-        let response = await fetch(PRIVATE_TRANSCRIPTION_API_URL+"/generate/", {
+        let response = await fetch(env.PRIVATE_TRANSCRIPTION_API_URL+"/generate/", {
             method: 'POST',
             body: data
         })
