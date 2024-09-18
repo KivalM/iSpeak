@@ -1,9 +1,80 @@
-<script>
-    import TopBar from "$lib/components/app/navigation/Header.svelte";
-    import Navigation from "$lib/components/app/navigation/Navigation.svelte";
+<script lang="ts">
+    import { applyAction, deserialize } from "$app/forms";
+    import Bar from "$lib/components/app/lessons/Bar.svelte";
+    import Test from "$lib/components/app/lessons/word/Test.svelte";
+    import Icon from "@iconify/svelte";
+    import type { ActionResult } from "@sveltejs/kit";
+
     export let data;
-    console.log(data);
+    export let form;
+
+    let processing = false;
+    async function submitForm(e: CustomEvent) {
+        if (processing) return;
+        processing = true;
+        let blob = e.detail.blob;
+        console.log("blob", blob);
+        const formData = new FormData();
+        formData.append("audio", blob, "audio.ogg");
+        formData.append("word", data.word);
+        const response = await fetch("", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "x-sveltekit-action": "true",
+            },
+        });
+        const result: ActionResult = deserialize(await response.text());
+        applyAction(result);
+        processing = false;
+    }
 </script>
 
-<TopBar user={data.profile} />
-<Navigation />
+<Bar
+    name={data.name}
+    description={data.description}
+    progress={data.idx}
+    max_progress={data.max}
+    barURL="/"
+></Bar>
+
+<div class="card flex flex-col items-center">
+    <form class="flex items-center justify-center">
+        <Test
+            phrase={data.word}
+            on:done={submitForm}
+            feedback={form}
+            {processing}
+        ></Test>
+    </form>
+</div>
+
+<div class="flex justify-between container mx-auto">
+    {#if data.prev !== null}
+        <a
+            data-sveltekit-replacestate
+            href="/demo?idx={data.prev}"
+            class="btn btn-primary"
+        >
+            <Icon icon="mdi:arrow-left" width="1rem" height="1rem" />
+            Previous</a
+        >
+    {:else}
+        <span></span>
+    {/if}
+
+    {#if data.next}
+        <a
+            data-sveltekit-replacestate
+            class="btn btn-primary"
+            href="/demo?idx={data.next}"
+            >Next
+            <Icon icon="mdi:arrow-right" width="1rem" height="1rem" />
+        </a>
+    {:else}
+        <a class="btn btn-primary" href="/">
+            Finish
+            <Icon icon="mdi:check" width="1rem" height="1rem" />
+        </a>
+    {/if}
+</div>

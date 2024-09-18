@@ -1,6 +1,7 @@
 <script lang="ts">
     import mascotFlag from "$lib/brand/mascot-flag.png";
     import Auth from "$lib/components/web/Auth.svelte";
+    export let form;
 </script>
 
 <div class="container mx-auto max-w-screen-lg min-h-screen p-4">
@@ -14,7 +15,7 @@
                 We're excited to see you again.
             </p>
 
-            <Auth tab={true} />
+            <Auth tab={true} {form} />
         </div>
         <img src={mascotFlag} alt="Mascot Flag" class="max-w-xs" />
     </div>

@@ -8,6 +8,7 @@
     export let progress: number = 20;
     export let max_progress: number = 100;
     export let open: boolean = false;
+    export let barURL: string = "/lessons";
 </script>
 
 <div class="navbar bg-base-100">
@@ -51,7 +52,7 @@
         >
             <Icon icon="mdi:settings" width="2rem" height="2rem" />
         </a>
-        <a href="/lessons" class="btn btn-ghost text-xl">
+        <a href={barURL} class="btn btn-ghost text-xl">
             <Icon icon="material-symbols:close" width="2rem" height="2rem" />
         </a>
     </div>

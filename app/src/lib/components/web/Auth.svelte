@@ -8,18 +8,27 @@
 </script>
 
 <form method="POST" action="/auth/login" class="flex flex-col gap-4 max-w-md">
-    {#if form && form.message}
-        <div class="alert alert-error">{form.message}</div>
+    {#if form && form.error}
+        <div class="alert alert-error">
+            {form.error}
+            {#if form.error == "Database error saving new user"}
+                Try a different username.
+            {/if}
+        </div>
     {/if}
 
     <label class="input input-bordered flex items-center gap-2 input-primary">
         <Icon icon="lucide:mail" class="w-6 h-6" />
-        <input type="text" class="grow" placeholder="Email" name="email" />
-        {#if form && form.email}
-            <div class="text-error">
-                {form.email}
-                {#if form.missing}is required{:else}
-                    is invalid{/if}
+        <input
+            type="text"
+            class="grow"
+            placeholder="Email"
+            name="email"
+            value={form ? form.email.value : ""}
+        />
+        {#if form && form.email.error !== null}
+            <div class="text-error text-sm">
+                {form.email.error}
             </div>
         {/if}
     </label>
@@ -35,12 +44,11 @@
                 class="grow"
                 placeholder="Username"
                 name="username"
+                value={form ? form.username.value : ""}
             />
-            {#if form && form.username}
-                <div class="text-error">
-                    {form.username}
-                    {#if form.missing}is required{:else}
-                        is invalid{/if}
+            {#if form && form.username.error !== null}
+                <div class="text-error text-sm">
+                    {form.username.error}
                 </div>
             {/if}
         </label>
@@ -55,12 +63,11 @@
                 class="grow"
                 placeholder="Full Name"
                 name="name"
+                value={form ? form.name.value : ""}
             />
-            {#if form && form.name}
-                <div class="text-error">
-                    {form.name}
-                    {#if form.missing}is required{:else}
-                        is invalid{/if}
+            {#if form && form.name.error !== null}
+                <div class="text-error text-sm">
+                    {form.name.error}
                 </div>
             {/if}
         </label>
@@ -74,12 +81,11 @@
             class="grow"
             placeholder="Password"
             name="password"
+            value={form ? form.password.value : ""}
         />
-        {#if form && form.password}
-            <div class="text-error">
-                {form.password}
-                {#if form.missing}is required{:else}
-                    is invalid{/if}
+        {#if form && form.password.error !== null}
+            <div class="text-error text-sm">
+                {form.password.error}
             </div>
         {/if}
     </label>

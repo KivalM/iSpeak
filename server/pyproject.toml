@@ -14,6 +14,7 @@ phonemizer = "^3.3.0"
 nltk = "^3.9.1"
 langchain-anthropic = "^0.1.23"
 ipykernel = "^6.29.5"
+levenshtein = "^0.25.1"
 
 [tool.poetry.group.test.dependencies]  
 pytest-randomly = "^3.15.0"  

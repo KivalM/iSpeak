@@ -1,6 +1,12 @@
 <script lang="ts">
     import Flag from "$lib/components/app/Flag.svelte";
     import mascotFlag from "$lib/brand/mascot-flag.png";
+    import Pricing from "$lib/components/web/Pricing.svelte";
+    import About from "$lib/components/web/About.svelte";
+    import Comparison from "$lib/components/web/Comparison.svelte";
+    import Mission from "$lib/components/web/Mission.svelte";
+    import Team from "$lib/components/web/Team.svelte";
+    import Contact from "$lib/components/web/Contact.svelte";
 </script>
 
 <div class="hero bg-base-200 min-h-[75vh]">
@@ -9,7 +15,9 @@
             <h1 class="text-4xl font-bold">
                 Say Hi to <span class="text-primary text-5xl">LangGuini</span>
             </h1>
-            <p class="py-6 text-xl">Learn a new language with ease.</p>
+            <p class="py-6 text-xl">
+                The AI-Powered language learning platform.
+            </p>
             <div class="gap-2 menu menu-sm menu-vertical">
                 <a class="btn btn-primary btn-lg" href="/auth/signup"
                     >Get Started
@@ -74,90 +82,23 @@
         </li>
     </ul>
 </div>
-
-<div class="divider"></div>
-
-<div class="hero bg-base-200">
-    <div class="hero-content text-center flex-col lg:flex-row">
-        <div class="max-w-lg flex flex-col justify-between">
-            <h1 class="text-4xl font-bold">
-                LangGuin for <span class="text-primary text-5xl">Everyone</span>
-            </h1>
-            <p class="py-6 text-xl">
-                LangGuin is a platform that allows you to learn a new language
-                with ease. We provide you with the tools you need to learn a new
-                language in a fun and interactive way, with a focus on accuracy
-                and pronunciation.
-            </p>
-            <button class="btn btn-accent btn-lg">Contact Us</button>
-        </div>
-
-        <div class="hidden lg:flex max-w-md">
-            <div class="flex flex-col">
-                <img
-                    src={mascotFlag}
-                    alt="Mascot Flag"
-                    class="w-96 h-96 mx-auto"
-                />
-            </div>
-        </div>
+<div class="container mx-auto flex justify-center">
+    <div class="text-center text-xs text-info-content">
+        At the moment we only support English but we are working on adding more.
     </div>
 </div>
 <div class="divider"></div>
-
-<div class="hero bg-base-200">
-    <div class="hero-content text-center flex-col lg:flex-row">
-        <div class="hidden lg:flex max-w-md">
-            <div class="flex flex-col">
-                <img
-                    src={mascotFlag}
-                    alt="Mascot Flag"
-                    class="w-96 h-96 mx-auto"
-                />
-            </div>
-        </div>
-        <div class="max-w-lg flex flex-col justify-between">
-            <h1 class="text-4xl font-bold">
-                LangGuin for <span class="text-primary text-5xl"
-                    >Institutions</span
-                >
-            </h1>
-            <p class="py-6 text-xl">
-                LangGuin is a platform that allows you to learn a new language
-                with ease. We provide you with the tools you need to learn a new
-                language in a fun and interactive way, with a focus on accuracy
-                and pronunciation.
-            </p>
-            <button class="btn btn-accent btn-lg">Contact Us</button>
-        </div>
-    </div>
-</div>
+<About />
 <div class="divider"></div>
+<Comparison />
 
-<div class="hero bg-base-200">
-    <div class="hero-content text-center flex-col lg:flex-row">
-        <div class="max-w-lg flex flex-col justify-between">
-            <h1 class="text-4xl font-bold">
-                LangGuin for <span class="text-primary text-5xl">
-                    Businesses
-                </span>
-            </h1>
-            <p class="py-6 text-xl">
-                LangGuin is a platform that allows you to learn a new language
-                with ease. We provide you with the tools you need to learn a new
-                language in a fun and interactive way, with a focus on accuracy
-                and pronunciation.
-            </p>
-            <button class="btn btn-accent btn-lg">Contact Us</button>
-        </div>
-        <div class="hidden lg:flex max-w-md">
-            <div class="flex flex-col">
-                <img
-                    src={mascotFlag}
-                    alt="Mascot Flag"
-                    class="w-96 h-96 mx-auto"
-                />
-            </div>
-        </div>
-    </div>
-</div>
+<div class="divider"></div>
+<Mission />
+
+<div class="divider"></div>
+<Pricing />
+<div class="divider"></div>
+<Team />
+<div class="divider"></div>
+<Contact />
+<div class="divider"></div>

@@ -1,4 +1,5 @@
-<div class="text-center font-sans bg-base-300 py-2">
-    Welcome to the demo version of LangGuin. Feel free to test out the app.
-</div>
-<slot />
+<section
+    class="absolute h-screen w-full bg-base-200 flex flex-col justify-between p-4"
+>
+    <slot></slot>
+</section>

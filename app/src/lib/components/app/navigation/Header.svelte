@@ -3,6 +3,7 @@
     import Icon from "@iconify/svelte";
 
     export let user;
+    export let demo = false;
 </script>
 
 <div class="navbar bg-base-100">
@@ -20,10 +21,18 @@
     </div>
 
     <div class="flex-none">
-        <div class="menu menu-horizontal">
-            <a href="/profile" class="btn btn-ghost btn-circle text-xl">
-                <Icon icon="mingcute:user-4-fill" class="text-4xl" />
-            </a>
-        </div>
+        {#if demo}
+            <div class="menu menu-horizontal">
+                <a href="/demo" class="btn btn-ghost btn-circle text-xl">
+                    <Icon icon="mingcute:user-4-fill" class="text-4xl" />
+                </a>
+            </div>
+        {:else}
+            <div class="menu menu-horizontal">
+                <a href="/profile" class="btn btn-ghost btn-circle text-xl">
+                    <Icon icon="mingcute:user-4-fill" class="text-4xl" />
+                </a>
+            </div>
+        {/if}
     </div>
 </div>

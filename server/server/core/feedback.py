@@ -72,6 +72,13 @@ class FeedbackPipeline:
     pipeline_name: str = "automatic-speech-recognition"
     model_name: str = "facebook/wav2vec2-lv-60-espeak-cv-ft"
 
+    def load_model():
+        pipe = pipeline(
+            FeedbackPipeline.pipeline_name,
+            model=FeedbackPipeline.model_name,
+        )
+        pipe("hello")
+
     def __init__(
         self,
     ):
@@ -86,7 +93,7 @@ class FeedbackPipeline:
 
     def get_phonemes(self, word: str) -> str:
         return phonemizer.phonemize(
-            word, language='en', backend='espeak', strip=True, language_switch='remove-flags'
+            word, language='en-gb', backend='espeak', strip=True, language_switch='remove-flags'
         )
 
     def score(self, user_ipa: str, target_ipa: str) -> float:
