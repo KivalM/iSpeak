@@ -10,6 +10,9 @@ dotenv.load_dotenv()
 
 
 class Suggestions(BaseModel):
+    '''
+    Suggestions for each word in the text
+    '''
     segment: str = Field(
         "",
         description="The segment of the word that needs to be corrected",
@@ -27,6 +30,9 @@ class Suggestions(BaseModel):
 
 
 class Feedback(BaseModel):
+    '''
+    Overall feedback on the text
+    '''
     general_feedback: str = Field(
         "",
         description="Overall feedback on the text",
@@ -38,6 +44,10 @@ class Feedback(BaseModel):
 
 
 class FeedbackGenerator:
+    """
+    Feedback generator class that uses the langchain_anthropic model to generate feedback
+    """
+
     def __init__(self):
         self.llm = ChatAnthropic(
             model="claude-3-5-sonnet-20240620"
@@ -88,15 +98,18 @@ class FeedbackPipeline:
         )
 
     def transcribe(self, audio_file: bytes) -> str:
+        # convert the audio file to IPA
         ipa = self.pipe(audio_file)['text']
         return ipa
 
     def get_phonemes(self, word: str) -> str:
+        # get the phonemes for the word
         return phonemizer.phonemize(
             word, language='en-gb', backend='espeak', strip=True, language_switch='remove-flags'
         )
 
     def score(self, user_ipa: str, target_ipa: str) -> float:
+        # get the similarity score between the user ipa and the target ipa
         return Levenshtein.ratio(user_ipa, target_ipa)
 
     def fix_spaces(self, ipa: str, target_ipa: str) -> str:
@@ -113,8 +126,11 @@ class FeedbackPipeline:
         return ipa, target_ipa
 
     def info_string(self, user_ipa: str, target_ipa: str) -> str:
+        # get the differences between the user ipa and the target ipa
         ops = Levenshtein.editops(user_ipa, target_ipa)
+        # get the non matching parts of the ipa
         non_matching = Levenshtein.opcodes(ops, user_ipa, target_ipa)
+        # get the contents of the non matching parts
         contents = []
         for tag, i1, i2, j1, j2 in non_matching:
             print(tag, user_ipa[i1:i2], target_ipa[j1:j2])
@@ -127,6 +143,7 @@ class FeedbackPipeline:
                 contents.append(('delete', user_ipa[i1:i2]))
             elif tag == 'insert':
                 contents.append(('insert', target_ipa[j1:j2]))
+        # build the string for the LLM
         contents_str = "The key differences in the string are highlighted below: "
         for tag, *args in contents:
             if tag == 'equal':
@@ -141,6 +158,7 @@ class FeedbackPipeline:
         return (contents, contents_str)
 
     def generate(self, word: str, audio_file: bytes) -> Dict[str, Any]:
+        # The function that generates the feedback
         user_ipa = self.transcribe(audio_file)
         target_ipa = self.get_phonemes(word)
 

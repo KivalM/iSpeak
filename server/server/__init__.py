@@ -15,21 +15,33 @@ app = FastAPI(
 
 @app.get("/")
 async def hello():
+    """
+    A simple hello world function
+    """
     return 'hello from Langguini!'
 
 
 @app.get("/health")
 async def health_check():
+    """
+    A simple health check function
+    """
     return {"status": "ok"}
 
 
 @app.post("/fb/")
 def transcribe_audio(word: str = Form(...),  audio: UploadFile = File(...)):
+    """
+    Transcribe the audio file and generate feedback on the pronunciation of the word
+    """
     pipe = FeedbackPipeline()
     return pipe.generate(word, audio.file.read())
 
 
 @app.post("/generate/")
 def generate_lesson(prompt: str = Form(...), target_language: str = Form("English"), level: int = Form(1)):
+    """
+    Generate a lesson based on the prompt, target language, and difficulty level
+    """
     generator = ContentGenerator()
     return generator.generate(prompt, target_language, level)

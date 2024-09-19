@@ -1,6 +1,5 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
-    import Flag from "../app/Flag.svelte";
 
     export let tab = false;
     export let form = null;

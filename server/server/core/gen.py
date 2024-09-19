@@ -10,6 +10,9 @@ import datetime
 
 
 class Lesson(BaseModel):
+    """
+    Lesson model that contains the name, content, category, description, and difficulty level of the lesson
+    """
     name: str = Field(
         "",
         description="The name of the lesson",
@@ -33,6 +36,10 @@ class Lesson(BaseModel):
 
 
 class ContentGenerator:
+    """
+    Content generator class that uses the langchain_anthropic model to generate content
+    """
+
     def __init__(self):
         self.llm = ChatAnthropic(
             model="claude-3-5-sonnet-20240620"
