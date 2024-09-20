@@ -1,25 +1,27 @@
 <script lang="ts">
-    import mascotFlag from "$lib/brand/mascot-flag.png";
+    import kival from "$lib/img/kival.jpg";
+    import dylan from "$lib/img/dylan.jpg";
+    import akshay from "$lib/img/akshay.jpg";
     import Icon from "@iconify/svelte";
 
     let members = {
         kival: {
             name: "Akshay Maharaj",
-            role: "Marketing Manager",
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-            linkedin: "https://www.linkedin.com/in/kival-mahadew/",
+            role: "Business Analyst",
+            image: akshay,
+            linkedin: "https://www.linkedin.com/in/akshay-maharaj-205048287/",
         },
         dylan: {
             name: "Kival Mahadew",
-            role: "Software Developer",
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-            linkedin: "https://www.linkedin.com/in/kival-mahadew/",
+            role: "Software Developer/ ML Engineer",
+            image: kival,
+            linkedin: "https://www.linkedin.com/in/kivalm/",
         },
         akshay: {
             name: "Dylan Govender",
-            role: "Brand Manager",
-            image: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-            linkedin: "https://www.linkedin.com/in/kival-mahadew/",
+            role: "Brand and Marketing",
+            image: dylan,
+            linkedin: "https://www.linkedin.com/in/dyla/",
         },
     };
 </script>
